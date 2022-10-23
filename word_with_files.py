@@ -1,3 +1,22 @@
+# задача 1
+recipes = []
+with open(r'C:\Users\Olesya.Dzhafarova\PycharmProjects\projects2\logs\data.txt', 'rt', encoding='UTF') as file:
+    for dish in file:
+        dish_name = dish.strip()
+        cook_book = {dish_name: []}
+        quantity_ingredient_count = file.readline()
+        for item in range(int(quantity_ingredient_count)):
+            emp = file.readline()
+            ingredient_name, quantity, measure = emp.strip().split(' | ')
+            cook_book[dish_name].append({'ingredient_name': ingredient_name, 'quantity': quantity, 'measure': measure})
+        blank_line = file.readline()
+        recipes.append(cook_book)
+        print(cook_book)
+
+
+
+
+# задача 3
 outputfile = 'output.txt'
 file1 = r'C:\Users\Olesya.Dzhafarova\PycharmProjects\projects2\1.txt'
 file2 = r'C:\Users\Olesya.Dzhafarova\PycharmProjects\projects2\2.txt'
