@@ -4,7 +4,7 @@ with open(r'C:\Users\Olesya.Dzhafarova\PycharmProjects\projects2\logs\data.txt',
     for dish in file:
         dish_name = dish.strip()
         cook_book = {dish_name: []}
-        quantity_ingredient_count = file.readline()
+        quantity_ingredient_count = file.readline().strip()
         for item in range(int(quantity_ingredient_count)):
             emp = file.readline()
             ingredient_name, quantity, measure = emp.strip().split(' | ')
@@ -13,7 +13,21 @@ with open(r'C:\Users\Olesya.Dzhafarova\PycharmProjects\projects2\logs\data.txt',
         recipes.append(cook_book)
         print(cook_book)
 
-
+#задача 2
+def get_shop_list_by_dishes(dishes, person_count):
+    for dish in dishes:
+        shop_list = {}
+        if dish in cook_book and dish in dishes:
+            dict_list = {}
+            for i in cook_book[dish][1:]:
+                if i['ingredient_name'] in dict_list:
+                    dict_list = {i['ingredient_name']: {'measure': i['measure'], 'quantity': i['quantity']}}
+                else:
+                    person = int(i['quantity']) * person_count
+                    dict_list = {i['ingredient_name']:{'measure':i['measure'], 'quantity': person}}
+                    shop_list.update(dict_list)
+        return shop_list
+print(get_shop_list_by_dishes(['Запеченный картофель', 'Омлет'], 2))
 
 
 # задача 3
