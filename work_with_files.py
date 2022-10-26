@@ -12,22 +12,25 @@ with open(r'C:\Users\Olesya.Dzhafarova\PycharmProjects\projects2\logs\data.txt',
         blank_line = file.readline()
         recipes.append(cook_book)
         print(cook_book)
+    #print(recipes)
 
 #задача 2
 def get_shop_list_by_dishes(dishes, person_count):
     for dish in dishes:
-        shop_list = {}
-        if dish in cook_book and dish in dishes:
-            dict_list = {}
-            for i in cook_book[dish][1:]:
-                if i['ingredient_name'] in dict_list:
-                    dict_list = {i['ingredient_name']: {'measure': i['measure'], 'quantity': i['quantity']}}
-                else:
-                    person = int(i['quantity']) * person_count
-                    dict_list = {i['ingredient_name']:{'measure':i['measure'], 'quantity': person}}
-                    shop_list.update(dict_list)
-        return shop_list
-print(get_shop_list_by_dishes(['Запеченный картофель', 'Омлет'], 2))
+        dict_list = {}
+        if dish in recipes[0] and dish in dishes:
+            for bludo in recipes:
+                for item, value in bludo.items():
+                    if item in dishes:
+                        for l in value:
+                            if l['ingredient_name'] in dict_list:
+                                dict_list = {l['ingredient_name']: {'measure': l['measure'], 'quantity': l['quantity']}}
+                            else:
+                                person = int(l['quantity']) * person_count
+                                dict_list = {l['ingredient_name']: {'measure': l['measure'], 'quantity': person}}
+                            print(dict_list)
+
+get_shop_list_by_dishes(['Запеченный картофель', 'Омлет'], 2)
 
 
 # задача 3
@@ -48,5 +51,5 @@ def num_of_lines(*files):
     for key, value in files2.items():
         myfile.write(f'Даны файлы: {key} \n')
         myfile.write(f'Количество строк: {value}, файл номер: {key}\n')
-    return
+    return files2
 num_of_lines(file1, file2, file3)
